@@ -18,7 +18,7 @@ Merges <- function (directory, activity_labels, features, files) {
   names(data) <- valid_col_names
   # Reads the Subject and Activity names for each row. Adds the new columns
   subj <- read.table(paste(directory,files[1], sep=""))
-  data$subject <- factor(subj$V1)
+  data$subject <- as.integer(subj$V1)
   y <- read.table(paste(directory,files[3], sep="")) 
   data$activity <- factor(y$V1, labels=activity_labels$V2)
   # Returns the merged data set
@@ -29,6 +29,7 @@ Merges <- function (directory, activity_labels, features, files) {
 # 3. Uses descriptive activity names to name the activities in the data set
 
 data <- rbind(Merges(directory, activity_labels, features, fileset1), Merges(directory, activity_labels, features, fileset2))
+data <- data[order(data$subject,data$activity),]
 
 # 2. Extracts only the measurements on the mean and standard deviation for each measurement.
 
