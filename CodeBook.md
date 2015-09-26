@@ -10,7 +10,7 @@ Script is situated in the run_analysis.R file.
 4. A "dplyr" library loaded for working with data frame. From the data frame "data" extracted columns titled "mean.." and "std..". It loaded to the "mydata" data frame. 
 5. A "reshape2" library loaded for data conversion. A "melt_data" data frame with data grouped according to subject and activites (melt() finction is used) is formed.
 6. An "out_data" data frame is formed (function dcast() is used). The "out_data" includes grouped by subject and activites data set. 
-7. The "out_data" is written to an "out_data.txt" file
+7. The "out_data" is written to an "out_data.txt" file (The "out_data.txt" file is situated in "directory" folder)
 
 ## Variables:
 
