@@ -28,7 +28,7 @@ Merges <- function (directory, activity_labels, features, files) {
 # 1. Merges the training and the test sets to create one data set. 
 # 3. Uses descriptive activity names to name the activities in the data set
 
-data <- rbind(Merges(directory, activity_label, features, fileset1), Merges(directory, activity_label, features, fileset2))
+data <- rbind(Merges(directory, activity_labels, features, fileset1), Merges(directory, activity_labels, features, fileset2))
 
 # 2. Extracts only the measurements on the mean and standard deviation for each measurement.
 
@@ -39,9 +39,11 @@ numvars <- ncol(mydata)-2
 # 4. Appropriately labels the data set with descriptive variable names.
 library(reshape2)
 melt_data <- melt(mydata, id=c("subject","activity"), measure.vars=c(1:numvars))
+names(melt_data) <- c("subject", "activity", "feature", "mean")
+melt_data <- melt(melt_data, id=c("subject","activity","feature"), measure.vars=c("mean"))
 
 # 5. From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
-out_data <- dcast(melt_data, subject + activity ~ variable, mean)
+out_data <- dcast(melt_data, subject + activity + features ~ variable, mean)
 
 # Writes the final tidy data in the "out_data.txt" file
-write.table(out_data, file=paste(directory,"out_data.txt", sep=""), row.name = FALSE)
+write.table(out_data, file=paste(directory,"out_data.txt", sep=""), row.name = FALSE, quote = FALSE, sep = "\t")
