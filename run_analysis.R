@@ -43,7 +43,7 @@ names(melt_data) <- c("subject", "activity", "feature", "mean")
 melt_data <- melt(melt_data, id=c("subject","activity","feature"), measure.vars=c("mean"))
 
 # 5. From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
-out_data <- dcast(melt_data, subject + activity + features ~ variable, mean)
+out_data <- dcast(melt_data, subject + activity + feature ~ variable, mean)
 
 # Writes the final tidy data in the "out_data.txt" file
 write.table(out_data, file=paste(directory,"out_data.txt", sep=""), row.name = FALSE, quote = FALSE, sep = "\t")
